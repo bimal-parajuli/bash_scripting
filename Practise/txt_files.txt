@@ -1,0 +1,9 @@
+ ---Files having extension .txt ---
+5.txt
+c_files.txt
+new-new-1.txt
+new-new-2.txt
+new-new-3.txt
+new-new-save.txt
+sh_files.txt
+txt_files.txt
