@@ -1,0 +1,171 @@
+Sample Input:
+Enter the size of reference string:
+9
+Enter the reference string
+1
+0
+0
+1
+2
+3
+2
+2
+0
+ 
+Output:
+4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code:
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+// total number of frames
+int number_of_frames = 3;
+
+// total size fo reference sting
+int size_of_ref;
+
+// hold the current no of frame.
+int current_size;
+
+
+void schedule(int[]);
+int getindex(int[], int[], int);
+
+
+
+int main()
+{
+    //get the size of reference sring.
+    scanf("%d", &size_of_ref);
+    
+    
+    int reference_string[size_of_ref];
+    
+    for(int i=0; i< size_of_ref; i++)
+    {
+        scanf("%d", &reference_string[i]);
+    }
+    
+    // number_of_frames = 3;
+    schedule(reference_string);
+    return 0;
+    
+}
+
+
+void schedule(int reference_string[])
+{
+    int page_fault_count = 0;
+    int frames[number_of_frames];
+    int ref, rep_ind, success;
+    
+    for(int i=0; i<number_of_frames; i++)
+    {
+        frames[i] = -1;
+    }
+    
+    for(int i=0; i<size_of_ref; i++)
+    {
+        ref = reference_string[i];
+        success = 0;
+        
+        for(int i = 0; i< current_size; i++)
+        {
+            if(frames[i] == ref)
+            {
+                success = 1;
+            }
+        }
+        
+        if(success)
+        {
+            continue;
+        }
+        
+        page_fault_count++;
+        
+        if(current_size < number_of_frames)
+        {
+            frames[current_size] = ref;
+            current_size++;
+            continue;
+        }
+        
+        rep_ind = getindex(reference_string, frames, i);
+        frames[rep_ind] = ref;
+    }
+    
+    printf("%d\n", page_fault_count);
+    
+}
+
+
+int getindex(int reference_string[], int frames[], int curr_ind)
+{
+    int minimum_occurences = -1;
+    int repl_index = -1;
+    int occurences;
+    int j;
+    
+    for(int i=0; i<number_of_frames; i++)
+    {
+        occurences = 0;
+        j = curr_ind-1;
+        
+
+        while( (j>=0) && (j>(curr_ind-4)))
+        {
+            if(frames[i] == reference_string[j])
+            {
+                occurences += 1;
+            }
+            j-=1;
+        }
+        j= curr_ind + 1;
+        while((j<(curr_ind + 4)) && (j<(size_of_ref)))
+        {
+            if(frames[i] == reference_string[j])
+            {
+                occurences++;
+            }
+            j++;
+        }
+        
+        if(occurences <= minimum_occurences)
+        {
+            if(repl_index == -1)
+            {
+                minimum_occurences = occurences;
+                repl_index = i;
+            }
+            else if(repl_index != -1 && frames[i] < frames[repl_index])
+            {
+                minimum_occurences=occurences;
+                repl_index =i;
+            }
+        }
+    }
+    
+    return repl_index;
+}
+
+
+
+
+
+

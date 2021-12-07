@@ -1,0 +1,76 @@
+Write a shell program for the following operation:
+Get a sentence from the user (all words in lower-case) such that it ends with “done”. Count the number of words (n) excluding done and print the count followed by central word (if count is even then n/2-1th word and if it odd n/2th). n should be minimum 4.
+Sample:
+ 
+Input:
+Hello
+my
+name
+is
+something
+done
+ 
+Output:
+5
+name
+
+
+
+
+
+
+
+
+
+
+
+
+
+Code:
+
+#! /bin/bash
+
+#array of string to store the wordws of sentence.
+sentence=() 
+
+while [ true ];
+do
+
+    # get input from user.
+    read word
+    
+    # If word is done, break loop.
+    if [ $word = "done" ]
+    then
+        break;
+    fi
+    
+    # ammend word to sentence array.
+    sentence+=($word)
+    
+done
+
+
+#Counting the total number of words in the sentence array.
+word_count=${#sentence[@]}  
+
+#display the number of words.
+echo $word_count
+
+
+# checking whether word count is odd  or even.
+
+remainder=`expr $word_count%2`
+if [ $remainder -eq 0]
+then
+    center=$(($word_count / 2))
+    center=$(($center - 1))
+else
+    center=$(($word_count / 2))
+fi
+
+# extracting the middle one from the sentence.
+middle_string=${sentence[$center]}
+
+# Displaying the middle word in small.
+echo ${middle_string,,}
