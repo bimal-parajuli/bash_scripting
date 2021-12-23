@@ -1,18 +1,17 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-#include <limits.h>
 
 void gethead();   // Function to get the starting position of the read/write head from the user.
 void getnumber(); // Function to get the number of requests from the user.
 void getdata();   // Function to get the array of actual requests from the user.
 void fcfs();      // Function to calculate and display the total seek time using FCFS algorithm.
 
-int n;                  // n           = number of requests coming to the disk.
-int head;               // head        = The starting position of the reader head of the disk
-int upper_limit=199;    // upper_limit = Upper limit of number of sectors in disk.
-int lower_limit = 0;    // lower_limit = Lower Limit of number of sectors in disk.
-int *request_array;     // Array containing the requests in order.
+int n;                 // n           = number of requests coming to the disk.
+int head;              // head        = The starting position of the reader head of the disk
+int upper_limit = 199; // upper_limit = Upper limit of number of sectors in disk.
+int lower_limit = 0;   // lower_limit = Lower Limit of number of sectors in disk.
+int *request_array;    // Array containing the requests in order.
 
 // Main function starts here
 int main()
@@ -59,10 +58,6 @@ void fcfs()
         past_position = request_array[i];
     }
     printf("%d", total_seek);
-    
-    
+
     return 0;
 }
-
-
-
