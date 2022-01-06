@@ -1,0 +1,14 @@
+This is a file
+It is very very useful file.
+This file will be used while practising sed.
+#sed is not a sed topic to learn...
+#sed isnt sed.
+#sed
+This is not a comment line. #but this part is a comment.
+
+This is just below a blank line.
+
+
+This is below 2 consecutive black lines.
+
+
